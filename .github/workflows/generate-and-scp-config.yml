@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: |
-        with open(driver.py, 'r') as file:
-          exec(file.read())
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'    
+      - run: |
+          with open(driver.py, 'r') as file:
+            exec(file.read())
