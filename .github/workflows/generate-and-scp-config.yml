@@ -18,5 +18,5 @@ jobs:
         with:
           python-version: '3.x'    
       - run: |
-          with open(driver.py, 'r') as file:
+          with open('./driver.py', 'r') as file:
             exec(file.read())
