@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: generate-and-scp-config
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  generate-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            print("Directory contents:")
+            for f in os.listdir():
+                print(f)
