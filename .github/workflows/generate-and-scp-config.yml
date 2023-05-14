@@ -18,7 +18,4 @@ jobs:
         with:
           python-version: '3.x'    
       - run: |
-          scripts = ['./driver.py'] 
-          for script in scripts:
-              with open(script, 'r') as file:
-                  exec(file.read())
+          python3 driver.py
