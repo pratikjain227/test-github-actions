@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Python Action
-      uses: jge162/Action-workflows@v2.1.1
-
     - run: |
-        echo "Install required dependencies" 
-        sudo apt-get update
-        sudo apt-get install python3
+        with open(driver.py, 'r') as file:
+          exec(file.read())
