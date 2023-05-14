@@ -18,5 +18,7 @@ jobs:
         with:
           python-version: '3.x'    
       - run: |
-          with open('./driver.py', 'r') as file:
-            exec(file.read())
+          scripts = ['./driver.py'] 
+          for script in scripts:
+              with open(script, 'r') as file:
+                  exec(file.read())
