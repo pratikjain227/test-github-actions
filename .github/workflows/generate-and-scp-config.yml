@@ -9,15 +9,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-config:
+  build-and-analyze:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - uses: jannekem/run-python-script-action@v1
-        with:
-          script: |
-            import os
-            print("Directory contents:")
-            for f in os.listdir():
-                print(f)
+    - name: Python Action
+      uses: jge162/Action-workflows@v2.1.1
+
+    - run: |
+        echo "Install required dependencies" 
+        sudo apt-get update
+        sudo apt-get install python3
