@@ -24,9 +24,13 @@ jobs:
           python3 driver.py
 
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SCP_SECRET_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2-instance-ip >> ~/.ssh/known_hosts
+          eval "$(ssh-agent)"
+          ssh-add ~/.ssh/id_rsa
 
       - name: Copy file to EC2 instance
         run: |
