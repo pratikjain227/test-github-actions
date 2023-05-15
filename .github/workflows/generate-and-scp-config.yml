@@ -23,13 +23,14 @@ jobs:
       - run: |
           python3 driver.py
 
-      - name: SCP
-        uses: moonpathbg/scp_uploader@latest
+      - uses: mdallasanta/ssh-scp-deploy@{version}
         with:
-            host: ${{ secrets.HOST }}
-            port: ${{ secrets.PORT }}
-            username: ${{ secrets.USERNAME }}
-            key : ${{ secrets.SCP_SECRET_KEY }}
-            source: "./config.json"
-            target: "/home/ubuntu/mockoonpoc"
-          
+          local: './config.json'                                                  # Local file path - REQUIRED false - DEFAULT ./
+          remote: '/home/ubuntu/mockoonpoc'                                                 # Remote file path - REQUIRED false - DEFAULT ~/
+          host: ${{secrets.HOST}}                                      # Remote server address - REQUIRED true
+          port: ${{secrets.PORT}}                                      # Remote server port - REQUIRED false - DEFAULT 22
+          user: ${{secrets.USERNAME}}                                      # Remote server user - REQUIRED true
+          key: ${{secrets.SCP_SECRET_KEY}}                                        # Remote server private key - REQUIRED at least one of "password" or "key" 
+          pre_upload: echo "This will be executed before the upload!"  # Command to run via ssh before scp upload - REQUIRED false
+          post_upload: echo "This will be executed after the upload!"  # Command to run via ssh after scp upload - REQUIRED false
+          scp_options: -v                                              # Flags to use during scp - REQUIRED false - DEFAULT ''
