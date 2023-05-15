@@ -26,8 +26,8 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SCP_SECRET_KEY }}
 
       - name: Copy file to EC2 instance
         run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ./config.json ubuntu@ec2-3-141-165-223.us-east-2.compute.amazonaws.com:/home/ubuntu/mockoonpoc
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SCP_SECRET_KEY }} ./config.json ubuntu@ec2-3-141-165-223.us-east-2.compute.amazonaws.com:/home/ubuntu/mockoonpoc
