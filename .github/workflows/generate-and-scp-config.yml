@@ -27,6 +27,7 @@ jobs:
         uses: moonpathbg/scp_uploader@latest
         with:
             host: ${{ secrets.HOST }}
+            port: ${{ secrets.PORT }}
             username: ${{ secrets.USERNAME }}
             key : ${{ secrets.SCP_SECRET_KEY }}
             source: "./config.json"
